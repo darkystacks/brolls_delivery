@@ -1,6 +1,6 @@
 # 🍣 Brolls Delivery 🍣
 
-<img width="800" alt="image" src="https://github.com/darkystacks/brolls_delivery/assets/120278663/56bd07d4-b1b8-4dfe-94a1-a766f4d15c64">
+<img width="1592" alt="image" src="https://github.com/darkystacks/brolls_delivery/assets/120278663/db40101e-cf2d-49f5-8cc8-1fc8324f245f">
 
 # 🛠 Technologies:
 
