@@ -20,4 +20,4 @@
 
 # 👁️ Preview
 
-(will be ready asap)
+https://brolls-delivery.vercel.app/
