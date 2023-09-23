@@ -5,27 +5,38 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 import { addItem, selectCartItemById } from '../redux/slices/cartSlice'
 
-const FullItem = () => {
-	const [item, setItem] = useState()
-	const { id } = useParams()
-	const navigate = useNavigate()
-	const dispatch = useDispatch()
+const FullItem: React.FC = () => {
+	const [item, setItem] = useState<{
+		id: string
+		title: string
+		price: number
+		imageUrl: string
+		sizes: number[]
+		types: number[]
+	}>()
 	const [activeType, setActiveType] = useState(0)
 	const [activeSize, setActiveSize] = useState(0)
+	const { id } = useParams()
+
 	const typeNames = ['оригинальные', 'спайси']
+
+	const navigate = useNavigate()
+	const dispatch = useDispatch()
 	const cartItem = useSelector(selectCartItemById(id))
 	const addedCount = cartItem ? cartItem.count : 0
 
 	const onClickAdd = () => {
-		const itemToCart = {
-			id: item.id,
-			title: item.title,
-			price: item.price,
-			imageUrl: item.imageUrl,
-			type: typeNames[activeType],
-			size: item.sizes[activeSize],
+		if (item) {
+			const itemToCart = {
+				id: item.id,
+				title: item.title,
+				price: item.price,
+				imageUrl: item.imageUrl,
+				type: typeNames[activeType],
+				size: item.sizes[activeSize],
+			}
+			dispatch(addItem(itemToCart))
 		}
-		dispatch(addItem(itemToCart))
 	}
 
 	useEffect(() => {

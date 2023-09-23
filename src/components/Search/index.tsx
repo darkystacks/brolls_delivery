@@ -5,21 +5,21 @@ import styles from './Search.module.scss'
 import { useDispatch } from 'react-redux'
 import { setSearchValue } from '../../redux/slices/filterSlice'
 
-const Search = () => {
-	const [value, setValue] = useState('')
+const Search: React.FC = () => {
+	const [value, setValue] = useState<string>('')
 	const dispatch = useDispatch()
 
-	const inputRef = useRef()
+	const inputRef = useRef<HTMLInputElement>(null)
 
 	const onClickClear = () => {
 		dispatch(setSearchValue(''))
 		setValue('')
-		inputRef.current.focus()
+		inputRef.current?.focus() // === if (inputRef.current) { inputRef.current.focus() }
 	}
 
 	const updateSearchValue = useCallback(
 		//избегаем пересоздания дебаунса при перерендере (useCallback)
-		debounce(str => {
+		debounce((str: string) => {
 			//оптимизация поиска(запрос будет
 			//уходить только при отсутствии изменений value в течении 300мс)
 			dispatch(setSearchValue(str))
@@ -27,9 +27,9 @@ const Search = () => {
 		[]
 	)
 
-	const onChangeInput = value => {
-		setValue(value)
-		updateSearchValue(value)
+	const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setValue(event.target.value)
+		updateSearchValue(event.target.value)
 	}
 
 	return (
@@ -46,7 +46,7 @@ const Search = () => {
 			<input
 				ref={inputRef}
 				value={value}
-				onChange={event => onChangeInput(event.target.value)}
+				onChange={event => onChangeInput(event)}
 				className={styles.input}
 				placeholder='Поиск еды...'
 			/>

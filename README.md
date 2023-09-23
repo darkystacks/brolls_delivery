@@ -5,8 +5,7 @@
 # 🛠 Technologies:
 
 - **ReactJS**
-- **TypeScript** (in progress)
-- **TypeScript** (in progress)
+- **TypeScript**
 - **Redux Toolkit**
 - **React Router v6**
 - **Axios + Fetch**

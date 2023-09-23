@@ -6,8 +6,8 @@ import Search from './Search'
 
 const Header = () => {
 	const { items, totalPrice } = useSelector(selectCart)
-	const totalCount = items.reduce((sum, obj) => sum + obj.count, 0)
 	const location = useLocation() //отличается от window.location слежением за урлом(при изменении компонент перерисуется)
+	const totalCount = items.reduce((sum: number, obj: any) => sum + obj.count, 0)
 
 	return (
 		<div className='header'>
