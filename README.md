@@ -16,6 +16,7 @@
 - React Pagination
 - Lodash.Debounce
 - Code Splitting, React Loadable, useWhyDidYouUpdate
+- Lazy loading(not a tech but should be mentioned)
 
 # 👁️ Preview
 
