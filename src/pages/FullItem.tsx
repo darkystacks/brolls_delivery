@@ -3,7 +3,8 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
-import { addItem, selectCartItemById } from '../redux/slices/cartSlice'
+import { selectCartItemById } from '../redux/cart/selectors'
+import { addItem } from '../redux/cart/slice'
 
 const FullItem: React.FC = () => {
 	const [item, setItem] = useState<{
@@ -22,7 +23,7 @@ const FullItem: React.FC = () => {
 
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
-	const cartItem = useSelector(selectCartItemById(id))
+	const cartItem = useSelector(selectCartItemById(id || ''))
 	const addedCount = cartItem ? cartItem.count : 0
 
 	const onClickAdd = () => {
@@ -34,6 +35,7 @@ const FullItem: React.FC = () => {
 				imageUrl: item.imageUrl,
 				type: typeNames[activeType],
 				size: item.sizes[activeSize],
+				count: 0,
 			}
 			dispatch(addItem(itemToCart))
 		}

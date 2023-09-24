@@ -1,11 +1,9 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import {
-	CartItem,
-	addItem,
-	selectCartItemById,
-} from '../../redux/slices/cartSlice'
+import { addItem } from '../../redux/cart/slice'
+import { selectCartItemById } from '../../redux/cart/selectors'
+import { CartItem } from '../../redux/cart/types'
 
 type ItemBlockProps = {
 	id: string

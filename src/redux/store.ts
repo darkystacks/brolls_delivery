@@ -1,9 +1,9 @@
 import { AnyAction, configureStore, ThunkDispatch } from '@reduxjs/toolkit'
 import { useDispatch } from 'react-redux'
 import thunkMiddleware from 'redux-thunk'
-import cart from './slices/cartSlice'
-import filter from './slices/filterSlice'
-import product from './slices/productSlice'
+import cart from './cart/slice'
+import filter from './filter/slice'
+import product from './product/slice'
 
 export const store = configureStore({
 	reducer: {

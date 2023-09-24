@@ -1,14 +1,29 @@
+import { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import logo from '../assets/img/sushi.png'
-import { selectCart } from '../redux/slices/cartSlice'
+import { selectCart } from '../redux/cart/selectors'
 import Search from './Search'
+import { CartItem } from '../redux/cart/types'
 
 const Header = () => {
 	const { items, totalPrice } = useSelector(selectCart)
 	const location = useLocation() //отличается от window.location слежением за урлом(при изменении компонент перерисуется)
-	const totalCount = items.reduce((sum: number, obj: any) => sum + obj.count, 0)
+	const isMounted = useRef(false)
 
+	const totalCount = items.reduce(
+		(sum: number, obj: CartItem) => sum + obj.count,
+		0
+	)
+
+	useEffect(() => {
+		if (isMounted.current) {
+			const itemsJson = JSON.stringify(items)
+			localStorage.setItem('cart', itemsJson)
+		}
+
+		isMounted.current = true
+	}, [items])
 	return (
 		<div className='header'>
 			<div className='container'>

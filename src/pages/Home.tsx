@@ -1,29 +1,24 @@
 import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 
-import { useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect } from 'react'
 import Categories from '../components/Categories.tsx'
 import Skeleton from '../components/ItemBlock/Skeleton.tsx'
 import ItemBlock from '../components/ItemBlock/index.tsx'
 import Pagination from '../components/Pagination/index.tsx'
 import Sort from '../components/Sort.tsx'
-import {
-	selectFilter,
-	setCategoryId,
-	setCurrentPage,
-} from '../redux/slices/filterSlice.js'
-import {
-	fetchProducts,
-	selectProductData,
-} from '../redux/slices/productSlice.js'
+import { selectFilter } from '../redux/filter/selectors.ts'
+import { setCategoryId, setCurrentPage } from '../redux/filter/slice.js'
+import { fetchProducts } from '../redux/product/asyncActions.ts'
+import { selectProductData } from '../redux/product/selectors.ts'
 import { useAppDispatch } from '../redux/store.ts'
+import { Product } from '../redux/product/types.ts'
 
 const Home: React.FC = () => {
-	const navigate = useNavigate()
+	// const navigate = useNavigate()
 
 	const dispatch = useAppDispatch()
-	const isDispatched = useRef(false)
-	const isMounted = useRef(false)
+	// const isDispatched = useRef(false)
+	// const isMounted = useRef(false)
 
 	const { categoryId, sort, currentPage, searchValue } =
 		useSelector(selectFilter)
@@ -113,10 +108,10 @@ const Home: React.FC = () => {
 	}, [categoryId, sort.sortProperty, searchValue, currentPage])
 
 	const filteredItems = items
-		.filter((el: any) =>
+		.filter((el: Product) =>
 			el.title.toLowerCase().includes(searchValue.toLowerCase())
 		)
-		.map((obj: any) => <ItemBlock key={obj.id} {...obj} />)
+		.map((obj: Product) => <ItemBlock key={obj.id} {...obj} />)
 
 	const skeletons = [...new Array(6)].map((_, index) => (
 		<Skeleton key={index} />
@@ -129,7 +124,7 @@ const Home: React.FC = () => {
 					categoryId={categoryId}
 					onChangeCategory={onChangeCategory}
 				/>
-				<Sort />
+				<Sort value={sort} />
 			</div>
 			<h2 className='content__title'>Все товары:</h2>
 			{status === 'error' ? (
