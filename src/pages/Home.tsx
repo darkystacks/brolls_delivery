@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 
 import {
 	Categories,
@@ -11,18 +11,19 @@ import {
 } from '../components'
 
 import { selectFilter } from '../redux/filter/selectors.ts'
-import { setCategoryId, setCurrentPage } from '../redux/filter/slice.js'
+import {
+	clearFilters,
+	setCategoryId,
+	setCurrentPage,
+} from '../redux/filter/slice.js'
 import { fetchProducts } from '../redux/product/asyncActions.ts'
 import { selectProductData } from '../redux/product/selectors.ts'
 import { Product } from '../redux/product/types.ts'
 import { useAppDispatch } from '../redux/store.ts'
 
 const Home: React.FC = () => {
-	// const navigate = useNavigate()
-
 	const dispatch = useAppDispatch()
-	// const isDispatched = useRef(false)
-	// const isMounted = useRef(false)
+	const isMounted = useRef(false)
 
 	const { categoryId, sort, currentPage, searchValue } =
 		useSelector(selectFilter)
@@ -34,6 +35,10 @@ const Home: React.FC = () => {
 
 	const onChangePage = (page: number) => {
 		dispatch(setCurrentPage(page))
+	}
+
+	const onClickClear = () => {
+		dispatch(clearFilters())
 	}
 
 	const getProducts = async () => {
@@ -55,57 +60,19 @@ const Home: React.FC = () => {
 		window.scrollTo(0, 0)
 	}
 
-	//если первый рендер уже произошел, вшиваем параметры в url
-	// useEffect(() => {
-	// 	if (isMounted.current) {
-	// 		const queryString = qs.stringify({
-	// 			sortProperty: sort.sortProperty,
-	// 			categoryId,
-	// 			currentPage,
-	// 		})
-	// 		navigate(`?${queryString}`) //сохранение параметров фильтрации в url
-	// 	}
-	// 	if (!window.location.search) {
-	// 		dispatch(fetchProducts({} as SearchPizzaParams))
-	// 	}
-	// }, [categoryId, sort, searchValue, currentPage])
+	useEffect(() => {
+		if (isMounted.current) {
+			const filterJson = JSON.stringify({
+				categoryId,
+				sort,
+				currentPage,
+				searchValue,
+			})
+			localStorage.setItem('filter', filterJson)
+		}
 
-	//проверяем url-params и сохраняем в редаксе
-	// useEffect(() => {
-	// 	if (window.location.search) {
-	// 		const params = qs.parse(
-	// 			window.location.search.substring(1)
-	// 		) as unknown as SearchPizzaParams
-	// 		console.log(params)
-	// 		const sort = sortList.find(obj => obj.sortProperty === params.sortBy)
-	// 		dispatch(
-	// 			setFilters({
-	// 				searchValue: params.search,
-	// 				categoryId: Number(params.category),
-	// 				currentPage: Number(params.currentPage),
-	// 				sort: sort || sortList[0],
-	// 			})
-	// 		)
-	// 		isDispatched.current = true
-	// 	}
-	// }, [])
-
-	// useEffect(() => {
-	// 	if (!isDispatched.current) {
-	// 		getProducts()
-	// 	}
-	// 	isDispatched.current = false
-	// }, [categoryId, sort, searchValue, currentPage])
-
-	// const filteredItems = items
-	// 	.filter((el: any) =>
-	// 		el.title.toLowerCase().includes(searchValue.toLowerCase())
-	// 	)
-	// 	.map((obj: any) => <ItemBlock key={obj.id} {...obj} />)
-
-	// const skeletons = [...new Array(6)].map((_, index) => (
-	// 	<Skeleton key={index} />
-	// ))
+		isMounted.current = true
+	}, [categoryId, sort, currentPage, searchValue])
 
 	useEffect(() => {
 		getProducts()
@@ -128,6 +95,9 @@ const Home: React.FC = () => {
 					categoryId={categoryId}
 					onChangeCategory={onChangeCategory}
 				/>
+				<div className='content__top-button' onClick={onClickClear}>
+					очистить
+				</div>
 				<SortPopup value={sort} />
 			</div>
 			<h2 className='content__title'>Все товары:</h2>

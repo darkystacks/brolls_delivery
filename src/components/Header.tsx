@@ -18,7 +18,7 @@ export const Header = () => {
 
 	useEffect(() => {
 		if (isMounted.current) {
-			const itemsJson = JSON.stringify(items)
+			const itemsJson: string = JSON.stringify(items)
 			localStorage.setItem('cart', itemsJson)
 		}
 

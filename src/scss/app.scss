@@ -70,6 +70,21 @@ body {
 		align-items: center;
 		justify-content: space-between;
 
+		&-button {
+			margin-left: 10px;
+			border: 1px solid $purple;
+			padding: 9px;
+			border-radius: 15px;
+			cursor: pointer;
+			color: $purple;
+			transition: 0.2s all ease-in-out;
+
+			&:hover {
+				color: black;
+				border: 1px solid black;
+			}
+		}
+
 		@media (max-width: 1260px) {
 			.categories {
 				width: 100%;
@@ -92,6 +107,10 @@ body {
 			}
 
 			flex-direction: column-reverse;
+
+			&-button {
+				margin-top: 10px;
+			}
 		}
 
 		@media (max-width: 760px) {
@@ -313,7 +332,7 @@ body {
 
 				&:last-of-type {
 					b {
-						color: $orange;
+						color: $purple;
 					}
 				}
 			}

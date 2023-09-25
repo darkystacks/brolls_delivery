@@ -1,15 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { getFilterFromLS } from '../../utils/getFilterFromLS'
 import { FilterSliceState, Sort, SortPropertyEnum } from './types'
 
-const initialState: FilterSliceState = {
-	categoryId: 0,
-	searchValue: '',
-	currentPage: 1,
-	sort: {
-		name: 'популярности ↓',
-		sortProperty: SortPropertyEnum.RATING_DESC,
-	},
-}
+const initialState: FilterSliceState = getFilterFromLS()
 
 const filterSlice = createSlice({
 	name: 'filter',
@@ -43,6 +36,15 @@ const filterSlice = createSlice({
 				state.searchValue = ''
 			}
 		},
+		clearFilters(state) {
+			state.categoryId = 0
+			state.searchValue = ''
+			state.currentPage = 1
+			state.sort = {
+				name: 'популярности ↓',
+				sortProperty: SortPropertyEnum.RATING_DESC,
+			}
+		},
 	},
 })
 
@@ -52,6 +54,7 @@ export const {
 	setCurrentPage,
 	setFilters,
 	setSearchValue,
+	clearFilters,
 } = filterSlice.actions
 
 export default filterSlice.reducer

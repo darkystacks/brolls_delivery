@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { selectCart, selectCartItemById } from '../../redux/cart/selectors'
 import { addItem } from '../../redux/cart/slice'
-import { selectCartItemById } from '../../redux/cart/selectors'
 import { CartItem } from '../../redux/cart/types'
 
 type ItemBlockProps = {
@@ -27,8 +27,16 @@ export const ItemBlock: React.FC<ItemBlockProps> = ({
 	const [activeType, setActiveType] = useState(0)
 	const [activeSize, setActiveSize] = useState(0)
 	const typeNames = ['оригинальные', 'спайси']
+	const cartItems = useSelector(selectCart).items
+	const addedCount = cartItem
+		? cartItems.reduce(
+				(sum: number, obj: CartItem) =>
+					obj.id === cartItem.id ? sum + obj.count : sum,
+				0
+		  )
+		: 0
 
-	const addedCount = cartItem ? cartItem.count : 0
+	// const addedCount = cartItem ? cartItem.count : 0
 
 	const onClickAdd = () => {
 		const item: CartItem = {

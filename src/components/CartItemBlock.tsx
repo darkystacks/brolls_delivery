@@ -25,13 +25,13 @@ export const CartItemBlock: React.FC<CartItemPRops> = ({
 	const dispatch = useDispatch()
 
 	const onClickPlus = () => {
-		dispatch(addItem({ id } as CartItem))
+		dispatch(addItem({ id, size, type } as CartItem))
 	}
 	const onClickMinus = () => {
-		dispatch(minusItem({ id } as CartItem))
+		dispatch(minusItem({ id, size, type } as CartItem))
 	}
 	const onRemove = () => {
-		dispatch(removeItem(id))
+		dispatch(removeItem({ id, size, type } as CartItem))
 	}
 
 	return (
