@@ -1,8 +1,8 @@
-import { DotSpinner } from '@uiball/loaders'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
+import { Loading } from '../components'
 import { selectCartItemById } from '../redux/cart/selectors'
 import { addItem } from '../redux/cart/slice'
 
@@ -57,11 +57,7 @@ const FullItem: React.FC = () => {
 	}, [])
 
 	if (!item) {
-		return (
-			<div className='loader'>
-				<DotSpinner size={60} speed={0.9} color='#9b9cec' />
-			</div>
-		)
+		return <Loading />
 	}
 
 	return (

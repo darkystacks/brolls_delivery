@@ -14,7 +14,7 @@ type ItemBlockProps = {
 	types: number[]
 }
 
-const ItemBLock: React.FC<ItemBlockProps> = ({
+export const ItemBlock: React.FC<ItemBlockProps> = ({
 	id,
 	title,
 	price,
@@ -100,5 +100,3 @@ const ItemBLock: React.FC<ItemBlockProps> = ({
 		</div>
 	)
 }
-
-export default ItemBLock

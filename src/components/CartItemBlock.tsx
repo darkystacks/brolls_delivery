@@ -13,7 +13,7 @@ type CartItemPRops = {
 	imageUrl: string
 }
 
-const CartItemBlock: React.FC<CartItemPRops> = ({
+export const CartItemBlock: React.FC<CartItemPRops> = ({
 	id,
 	title,
 	type,
@@ -116,5 +116,3 @@ const CartItemBlock: React.FC<CartItemPRops> = ({
 		</div>
 	)
 }
-
-export default CartItemBlock

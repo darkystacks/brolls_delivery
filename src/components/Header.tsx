@@ -2,11 +2,11 @@ import { useEffect, useRef } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 import logo from '../assets/img/sushi.png'
+import { Search } from '../components'
 import { selectCart } from '../redux/cart/selectors'
-import Search from './Search'
 import { CartItem } from '../redux/cart/types'
 
-const Header = () => {
+export const Header = () => {
 	const { items, totalPrice } = useSelector(selectCart)
 	const location = useLocation() //отличается от window.location слежением за урлом(при изменении компонент перерисуется)
 	const isMounted = useRef(false)
@@ -81,5 +81,3 @@ const Header = () => {
 		</div>
 	)
 }
-
-export default Header

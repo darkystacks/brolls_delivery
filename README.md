@@ -9,19 +9,20 @@
 # 🛠 Technologies:
 
 - **ReactJS**
+- **Vite**
 - **TypeScript**
 - **Redux Toolkit**
 - **React Router v6**
-- **Axios + Fetch**
+- **Axios**
 - **React Hooks**
 - **Prettier**
 - **ESLint**
 - CSS-Modules / SCSS
-- React Content Loader(Skeleton)
+- React Content Loader(skeletons)
 - React Pagination
 - Lodash.Debounce
-- Code Splitting, React Loadable, useWhyDidYouUpdate
-- Lazy loading
+- Code Splitting, useWhyDidYouUpdate, React.lazy(lazy loading)
+- uiball(loader)
 
 # 👁️ Preview
 

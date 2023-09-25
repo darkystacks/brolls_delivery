@@ -1,16 +1,15 @@
 import { Suspense, lazy } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-// import Cart from './pages/Cart'
+import { Loading } from './components'
 import MainLayout from './layouts/MainLayout.jsx'
-import FullItem from './pages/FullItem'
 import Home from './pages/Home'
-import NotFound from './pages/NotFound'
 
-import { DotSpinner } from '@uiball/loaders'
 import './scss/app.scss'
 
 const Cart = lazy(() => import('./pages/Cart'))
+const FullItem = lazy(() => import('./pages/FullItem'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 
 function App() {
 	return (
@@ -20,20 +19,27 @@ function App() {
 				<Route
 					path='cart'
 					element={
-						<Suspense
-							fallback={
-								<div className='loader'>
-									<DotSpinner size={60} speed={0.9} color='#9b9cec' />
-								</div>
-							}
-						>
+						<Suspense fallback={<Loading />}>
 							<Cart />
 						</Suspense>
 					}
 				/>
-				<Route path='item/:id' element={<FullItem />} /> // :параметр(может быть
-				сколько угодно)
-				<Route path='*' element={<NotFound />} />
+				<Route
+					path='item/:id' // :параметр(может быть сколько угодно)
+					element={
+						<Suspense fallback={<Loading />}>
+							<FullItem />
+						</Suspense>
+					}
+				/>
+				<Route
+					path='*'
+					element={
+						<Suspense fallback={<Loading />}>
+							<NotFound />
+						</Suspense>
+					}
+				/>
 			</Route>
 		</Routes>
 	)

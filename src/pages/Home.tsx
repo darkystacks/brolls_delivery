@@ -1,17 +1,21 @@
 import { useSelector } from 'react-redux'
 
 import { useCallback, useEffect } from 'react'
-import Categories from '../components/Categories.tsx'
-import Skeleton from '../components/ItemBlock/Skeleton.tsx'
-import ItemBlock from '../components/ItemBlock/index.tsx'
-import Pagination from '../components/Pagination/index.tsx'
-import Sort from '../components/Sort.tsx'
+
+import {
+	Categories,
+	ItemBlock,
+	Pagination,
+	Skeleton,
+	SortPopup,
+} from '../components'
+
 import { selectFilter } from '../redux/filter/selectors.ts'
 import { setCategoryId, setCurrentPage } from '../redux/filter/slice.js'
 import { fetchProducts } from '../redux/product/asyncActions.ts'
 import { selectProductData } from '../redux/product/selectors.ts'
-import { useAppDispatch } from '../redux/store.ts'
 import { Product } from '../redux/product/types.ts'
+import { useAppDispatch } from '../redux/store.ts'
 
 const Home: React.FC = () => {
 	// const navigate = useNavigate()
@@ -124,7 +128,7 @@ const Home: React.FC = () => {
 					categoryId={categoryId}
 					onChangeCategory={onChangeCategory}
 				/>
-				<Sort value={sort} />
+				<SortPopup value={sort} />
 			</div>
 			<h2 className='content__title'>Все товары:</h2>
 			{status === 'error' ? (
