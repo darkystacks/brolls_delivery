@@ -404,15 +404,15 @@ body {
 	}
 }
 
+.loader {
+	display: flex;
+	justify-content: center;
+	margin: 250px auto;
+}
+
 .fullItemBlock {
 	max-width: 680px;
 	text-align: center;
-
-	&__loader {
-		display: flex;
-		justify-content: center;
-		margin: 250px auto;
-	}
 
 	&__image {
 		width: 100%;

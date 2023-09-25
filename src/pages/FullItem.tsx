@@ -58,7 +58,7 @@ const FullItem: React.FC = () => {
 
 	if (!item) {
 		return (
-			<div className='fullItemBlock__loader'>
+			<div className='loader'>
 				<DotSpinner size={60} speed={0.9} color='#9b9cec' />
 			</div>
 		)
