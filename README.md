@@ -4,7 +4,7 @@
 
 # 📖 Description:
 
-Actually not all used technologies needed here so much, but in case of mastering it and some educational purpose it is what it is. Enjoy!
+- Actually not all used technologies needed here so much, but in case of mastering it and some educational purpose it is what it is. Enjoy!
 
 # 🛠 Technologies:
 
@@ -21,8 +21,10 @@ Actually not all used technologies needed here so much, but in case of mastering
 - React Pagination
 - Lodash.Debounce
 - Code Splitting, React Loadable, useWhyDidYouUpdate
-- Lazy loading(not a tech but should be mentioned)
+- Lazy loading
 
 # 👁️ Preview
 
 https://brolls-delivery.vercel.app/
+
+- Could be some kind of routing bugs (idk how to fix this, its on vercel side)
